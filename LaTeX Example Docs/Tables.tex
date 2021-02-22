@@ -1,0 +1,30 @@
+\section{Tables}
+\textbf{Tables} in \LaTeX{} can be accomplished through the use of a special environment called \texttt{tabular}. However, unlike other basic environments, \texttt{tabular} takes in a parameter that both tells how each column will be justified and the amount of columns. Here's an example:\\
+
+\begin{center}
+\begin{tabular}{cc}
+
+Code & Result\\
+\hline\\
+
+\parbox{4cm} {
+    \texttt{\textbackslash begin\{tabular\}\{ccc\}\\
+    0, 0 \& 1, 0 \& 2, 0 \textbackslash \textbackslash \\
+    0, 1 \& 1, 1 \& 2, 1 \textbackslash \textbackslash \\
+    0, 2 \& 1, 2 \& 2, 2 \textbackslash \textbackslash \\
+    \textbackslash end\{tabular\}\\
+    }
+}
+
+&
+
+\begin{tabular}{ccc}
+    0, 0 & 1, 0 & 2, 0 \\
+    0, 1 & 1, 1 & 2, 1 \\
+    0, 2 & 1, 2 & 2, 2 \\
+\end{tabular}
+
+\end{tabular}
+\end{center}
+
+The code above shows
