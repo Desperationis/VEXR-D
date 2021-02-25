@@ -25,6 +25,3 @@ For our purposes, the idea was to have a python program on a Raspberry Pi send s
 So I did just that. I looked up the wire configuration of both the Raspberry Pi and Cortex, linked them together electronically, and made code to test if serial code can be sent in the first place. After that, I implemented a packet-backed system in RobotC that allowed me to completely mimic all inputs made on a regular VEX controller using just 4 bytes, or 32 bits. I then tried it out on a mobile hotspot for maximum bandwidth and signal strength, and the result is perfect.
 
 This system allowed me to reach 2-3x farther distances compared to a VEXnet controller due to a packet switcher now amplifying the strength of the signal. The code is also set up in a way where, in case of any disconnect, the Raspberry Pi will seamlessly connect back to the transmitter; Just like any regular controller. If we ever want to control the robot wirelessly over colossal distances, we can also buy a dedicated router, connect it to a computer via ethernet, and simply move the router near wherever the robot will usually be and have the ethernet cable bring signal to our computer.
-
-
-% \cite{DJI}
