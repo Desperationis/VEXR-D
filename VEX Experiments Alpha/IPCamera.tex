@@ -4,7 +4,7 @@ This project proposes two different methods for near realtime, wireless, cheap v
 
 \subsection{Mobile IP Camera}
 
-This was my first go-to option for wireless video transmission. Phones are pretty small, have cameras and wireless capabilities, and nearly everyone in California has one. So, I did a formal experiment between three video streaming apps -- Skype, Jami, and IP Webcam -- all on three different phones and constructed a histogram of the round-trip latency of each; All apps had the most optimal settings at streaming at 480p. The data-collection process, which was automated with a python script and a trained AI over the span of an hour, was simple:
+This was my first go-to option for wireless video transmission. Phones are pretty small, have cameras and wireless capabilities, and nearly everyone in California has one. So, I did a formal experiment between three video streaming apps -- Skype \cite{Skype}, Jami \cite{Jami}, and IP Webcam \cite{IPWebcam} -- all on three different phones and constructed a histogram of the round-trip latency of each; All apps had the most optimal settings at streaming at 480p. The data-collection process, which was automated with a python script and a trained AI over the span of an hour, was simple:
 
 \begin{enumerate}
 \item{Start a clock on a computer.}
@@ -49,7 +49,7 @@ In another, \textit{much} longer experiment, I played around with settings that 
     \includegraphics[width=\textwidth,height=3cm,keepaspectratio=true]{On5Jami}
     \includegraphics[width=\textwidth,height=3cm,keepaspectratio=true]{On5IPCam}
     \caption{
-        Round-trip latency of the apps on a Samnsung On5.
+        Round-trip latency of the apps on a Samsung On5 \cite{On5}.
     }
 \end{figure}
 
@@ -59,7 +59,7 @@ In another, \textit{much} longer experiment, I played around with settings that 
     \includegraphics[width=\textwidth,height=3cm,keepaspectratio=true]{BladeJami}
     \includegraphics[width=\textwidth,height=3cm,keepaspectratio=true]{BladeIPCam}
     \caption{
-        Round-trip latency of the apps on a ZTE Blade Max.
+        Round-trip latency of the apps on a ZTE Blade Max \cite{BladeMax}.
     }
 \end{figure}
 
@@ -69,7 +69,7 @@ In another, \textit{much} longer experiment, I played around with settings that 
     \includegraphics[width=\textwidth,height=3cm,keepaspectratio=true]{StyloJami}
     \includegraphics[width=\textwidth,height=3cm,keepaspectratio=true]{StyloIPCam}
     \caption{
-        Round-trip latency of the apps on a LG Stylo 5.
+        Round-trip latency of the apps on a LG Stylo 6 \cite{Stylo}.
     }
 \end{figure}
 
@@ -86,7 +86,7 @@ I wanted more quality. More speed. MORE POWER. Due to this, I got a Raspberry Pi
     }
 \end{figure}
 
-Unfortunately, the solution to this problem was not easily solvable. The streaming scripts online focused primarily toward streaming over the internet, not a LAN. So I spent weeks finding and researching streaming libraries and the basics of networking until I derived two very special commands using a media-streaming library called gstreamer:
+Unfortunately, the solution to this problem was not easily solvable. The streaming scripts online focused primarily toward streaming over the internet, not a LAN. So I spent weeks finding and researching streaming libraries and the basics of networking until I derived two very special commands using a media-streaming library called gstreamer \cite{gstreamer}:
 
 \begin{centering}
 
