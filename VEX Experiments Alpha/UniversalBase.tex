@@ -2,7 +2,7 @@
 
 The aim for this project was to create an all-purpose, powerful chassis that is lighter, simpler, and more maintainable than previous designs; Doing this would allow us to very quickly switch from competition to competition without re-building the entire robot from scratch, as well fix the robot easily.
 
-\textit{[Halted]: Wheels don't work with my floor; Waiting for classroom return.}
+\textit{[Halted]: Encoders can't be tested properly; Waiting for classroom return.}
 
 \begin{figure}[h]
     \centering
@@ -24,7 +24,7 @@ The idea was to switch over to a 4-motor chassis that had its axes supported on 
     }
 \end{figure}
 
-Upon building the chassis, it was apparent that the unpowered traction wheels were not touching the ground. Via a 3D model, I found out that holonomic wheels were a millimeter bigger in diameter. While this may not be a problem in carpet or foam environments where the floor has some give, my smooth tile floor made it near impossible for the two traction wheels to gain any traction. I did not give up, and slapped rubber bands and duct tape on the wheels to make up for that gap.
+Upon building the chassis, it was apparent that the unpowered encoder wheels were not touching the ground. Via a 3D model, I found out that holonomic wheels were a millimeter bigger in diameter. While this may not be a problem in carpet or foam environments where the floor has some give, my smooth tile floor made it near impossible for the two traction wheels to gain any traction. I did not give up, and slapped rubber bands and duct tape on the wheels to make up for that gap.
 
 \begin{figure}[h]
     \centering
@@ -34,13 +34,13 @@ Upon building the chassis, it was apparent that the unpowered traction wheels we
     }
 \end{figure}
 
-I went through various iterations of layering to fix this issue. Blue tape, blue tape + rubber bands, blue tape + electrical tape, blue tape + electrical tape + rubber bands, all with varying amounts of tape and rubber bands. Fortunately, the blue tape + electrical tape + rubber band wheel, or "super wheel", worked excellently and consisted of 5 layers of duct tape, 2 layers of electrical tape, and 5 rubber bands. Unfortunately, my tiled floor had spaced valleys that momentarily lifted a wheel or two off the ground when driving, thereby making the encoder unreliable and the super wheel pretty useless.
+I went through various iterations of layering to fix this issue. Blue tape, blue tape + rubber bands, blue tape + electrical tape, blue tape + electrical tape + rubber bands, all with varying amounts of tape and rubber bands. Fortunately, the blue tape + electrical tape + rubber band wheel, or "super wheel", worked excellently and consisted of 5 layers of duct tape, 2 layers of electrical tape, and 5 rubber bands. Unfortunately, my tiled floor had spaced valleys that momentarily lifted a wheel or two off the ground when driving, making a good test with an encoder very difficult.
 
 With the prototype showing somewhat promising results in every other department, I rebuilt the robot in a way where it's very maintainable. Mainly, I flipped the side metal bars so that the shaft collars holding the wheels together are exposed, so that you can easily remove and attach the wheels in case anything goes wrong. I also made extra sure all screws holding the robot together were screwed outside to in, making it very easy to tighten nearly all parts of the robot without awkwardly tightening it from the inside.
 
-All in all, the maximum size of the robot is 18" x 15.5" if it were built with the same parts; 17" x 15.5" if we take very special care building it. If for any reason the building constraints shrink, we can swap the X-axis and Y-axis bars with 15-hole C-channel, ditch the encoder wheels, and get the smallest possible size of 13" x 10".
+All in all, the chassis is incredibly study, has very customizable chassis width and length to make sensor and arm mounting a lot easier, and a lot more maintainable (from experience). The maximum size of the robot is 18" x 15.5" if it were built with the same parts I used, or 17" x 15.5" if we take very special care building it. If for any reason the building constraints shrink, we can swap the X-axis and Y-axis bars with 15-hole C-channel, ditch the encoder wheels, and get the smallest possible size of 13" x 10".
 
-\textit{Note:} This base needs further testing in the classroom.
+\textit{Note:} This base needs further testing in the classroom to determine if the encoders are actually accurate.
 
 \subsection{The Process}
 Here are some pictures I took while solving the tiny-gap issue.
