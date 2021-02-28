@@ -1,6 +1,6 @@
-\section{[Completed] IP Camera}
+﻿\section{[Completed] IP Camera}
 
-This project proposes two different methods for near realtime, wireless, cheap video transmission. Keep in mind that the research done by this singular project completely dwarfs every single other project in this document; The basics of wireless networks, statistics, and an entirely different operating system had to be learned in the span of 4 months to make this possible. Here I'll try to keep things are brief as possible.
+This project proposes two different methods for near real-time, wireless, cheap video transmission. Keep in mind that the research done by this singular project completely dwarfs every single other project in this document; The basics of wireless networks, statistics, and an entirely different operating system had to be learned in the span of 4 months to make this possible. Here I'll try to keep things are brief as possible.
 
 \subsection{Mobile IP Camera}
 
@@ -100,6 +100,6 @@ Unfortunately, the solution to this problem was not easily solvable. The streami
 
 \end{centering}
 
-The sender command basically says this: feed the H.264-encoded video feed of the Raspberry Pi's camera (\texttt{raspivid}) into \texttt{gst-launch-1.0} (gstreamer) via the pipe operator \texttt{|} so that it gets sent to the receiver via a UCP connection. The receiving command simply decodes the data into a window.
+The sender command basically says this: feed the H.264-encoded video feed of the Raspberry Pi's camera (\texttt{raspivid}) into \texttt{gst-launch-1.0} (gstreamer) via the pipe operator \texttt{|} so that it gets sent to the receiver via a UDP connection. The receiving command simply decodes the data into a window.
 
-While I am yet to offically collect data via a table, I can say, from experience, that this setup can stream 720p with less than 150 ms of latency at 30 fps; Something unheard of in weak Android phones. Due to this, I would consider using this camera as the main camera, with phone acting as backups / side cameras.
+While I am yet to officially collect data via a table, I can say, from experience, that this setup can stream 720p with less than 150 ms of latency at 30 fps; Something unheard of in weak Android phones. Due to this, I would consider using this camera as the main camera, with phone acting as backups / side cameras.
