@@ -1,4 +1,4 @@
-\section{[Completed] A Simple Battery Meter}
+\section{[Edited] A Simple Battery Meter}
 In this project, I tried making a battery meter out of an Arduino and electronic parts in order to accurately assess VEX battery life and percentage.
 
 \begin{figure}[h]
@@ -22,16 +22,15 @@ There are two ways to measure battery life: actively measure every single coulom
     }
 \end{figure}
 
-These complex methods are needed because the formula for a battery's discharge curve, for our battery's chemistry, is closer to a weird polynomial rather than linear or quadratic. I tried to get a cubic regression line for the discharge curves, but it fit it pretty badly and gave off results.
+To try to at least an accurate reading without calculus, I made a discharge curve using 2-4 motors as the load over time and made it a function of voltage (This was inspired by how another team, Renegade Robotics \cite{RenegadeRobotics}, does it). With this function, I was able to determine the approximate remaining battery capacity of our battery by measuring it's unloaded voltage, thus finishing the software aspect of this project.
 
 \begin{figure}[h]
     \centering
     \includegraphics[width=\textwidth,height=7cm,keepaspectratio=true]{BatteryTesterPortable}
     \includegraphics[width=\textwidth,height=7cm,keepaspectratio=true]{BatteryTesterPortInside}
     \caption{
-        The portable version of this project crammed into an old phone box. A blank PCB was used instead of a breadboard in this version to prevent the battery from accidentally shorting itself in the case it were ever dropped. The button is used to toggle the backlight to control power consumption, so that it can be powered by a mobile battery efficiently.
+    The portable version of this project crammed into an old phone box. A blank PCB was used instead of a breadboard in this version to prevent the battery from accidentally shorting itself in the case it were ever dropped. The button is used to toggle the backlight to control power consumption, so that it can be powered by a mobile battery efficiently.
     }
 \end{figure}
 
-
-In the end, I simply turned the Arduino into a voltmeter that tells me whether or not the battery was near or at full capacity, and made a crummy percent bar that is only accurate through 100-90\% and 20-0\%; This was inspired by how another team, Renegade Robotics \cite{RenegadeRobotics}, does it.
+After that, I crammed the electronics into an old phone box, used leftover screws and nuts to secure its components, and called it a day.
