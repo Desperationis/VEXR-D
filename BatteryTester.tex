@@ -3,10 +3,10 @@ In this project, I tried making a battery meter out of an Arduino and electronic
 
 \begin{figure}[h]
     \centering
-    \includegraphics[width=\textwidth,height=7cm,keepaspectratio=true]{circuit}
-    \includegraphics[width=\textwidth,height=7cm,keepaspectratio=true]{BatteryTesterSetup}
+    \includegraphics[width=\textwidth,height=7cm,keepaspectratio=true]{BatteryTester/circuit}
+    \includegraphics[width=\textwidth,height=7cm,keepaspectratio=true]{BatteryTester/BatteryTesterSetup}
     \caption{
-        (Left) The circuit. (Right) The circuit, but in real life.
+        (Left) The circuit. (Right) The circuit on a breadboard.
     }
 \end{figure}
 
@@ -16,7 +16,7 @@ There are two ways to measure battery life: actively measure every single coulom
 
 \begin{figure}[h]
     \centering
-    \includegraphics[width=\textwidth,height=8cm,keepaspectratio=true]{DischargeGraph}
+    \includegraphics[width=\textwidth,height=8cm,keepaspectratio=true]{BatteryTester/DischargeGraph}
     \caption{
         The VEX battery's discharge curve over various currents, thanks to Quazar \cite{Quazar}. Notice how the voltage virtually levels out during the majority of its lifetime; This makes it difficult to get an approximate percent throughout the entire lifetime of the battery with just voltage without using integration.
     }
@@ -26,8 +26,8 @@ To try to at least an accurate reading without calculus, I made a discharge curv
 
 \begin{figure}[h]
     \centering
-    \includegraphics[width=\textwidth,height=7cm,keepaspectratio=true]{BatteryTesterPortable}
-    \includegraphics[width=\textwidth,height=7cm,keepaspectratio=true]{BatteryTesterPortInside}
+    \includegraphics[width=\textwidth,height=7cm,keepaspectratio=true]{BatteryTester/BatteryTesterPortable}
+    \includegraphics[width=\textwidth,height=7cm,keepaspectratio=true]{BatteryTester/BatteryTesterPortInside}
     \caption{
     The portable version of this project crammed into an old phone box. A blank PCB was used instead of a breadboard in this version to prevent the battery from accidentally shorting itself in the case it were ever dropped. The button is used to toggle the backlight to control power consumption, so that it can be powered by a mobile battery efficiently.
     }
