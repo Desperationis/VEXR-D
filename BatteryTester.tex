@@ -1,5 +1,5 @@
-\section{[Complete] A Simple Battery Meter}
-In this project, I tried making a battery meter out of an Arduino and electronic parts in order to accurately assess VEX battery life and percentage.
+\section{Battery Meter}
+Using an Arduino, I made a circuit to display the approximate capacity left in a VEX battery.
 
 \begin{figure}[h]
     \centering
@@ -10,9 +10,9 @@ In this project, I tried making a battery meter out of an Arduino and electronic
     }
 \end{figure}
 
-This was one of my few projects that was in the making since 2020. I spend countless hours going through countless links, websites, blogs, research papers, to find and easy and practical way to determine battery life. I initially thought it was as simple as solving for battery life by a function of battery voltage, but I was wrong.
+At the most basic level, the circuit works by using a voltage divider to measure the voltage of any battery up to 12v; All the other wires are to power the LCD and arduino. After that, I used math to display the approximate battery life left as a function of voltage.
 
-There are two ways to measure battery life: actively measure every single coulomb that comes in and out of the battery using calculus to get a really good estimation (coulomb counting \cite{CoulombCounting}) or integrate voltage over time on a known dischage curve \cite{IntegrationVoltage}. Both require college-level calculus, which I have not learned yet.
+This how other devices measure battery life however. Your phone, for example, actively measures every bit of charge that comes in and out of your phone and uses calculus to give a accurate battery percent \cite{CoulombCounting}. Simpler devices instead integrate voltage over time on a known dischage curve \cite{IntegrationVoltage} and use that to give a slightly less accurate estimation of battery. I didn't use either since I don't know calculus yet.
 
 \begin{figure}[h]
     \centering
@@ -22,7 +22,7 @@ There are two ways to measure battery life: actively measure every single coulom
     }
 \end{figure}
 
-To try to at least an accurate reading without calculus, I made a discharge curve using 2-4 motors as the load over time and made it a function of voltage (This was inspired by how another team, Renegade Robotics \cite{RenegadeRobotics}, does it). With this function, I was able to determine the approximate remaining battery capacity of our battery by measuring it's unloaded voltage, thus finishing the software aspect of this project.
+To try to at least an accurate reading without calculus, I made a discharge curve using 2 motors as the load over time and made it a function of voltage (This was inspired by how Renegade Robotics \cite{RenegadeRobotics} does it). With this function, I was able to determine the approximate remaining battery capacity of our battery by measuring it's unloaded voltage.
 
 \begin{figure}[h]
     \centering
