@@ -1,6 +1,6 @@
-\section{[Complete] The Partner Controller}
+\section{Partner Controller}
 
-VEX Robotics once sold a "partner controller" that allowed two controllers to control a robot. However, as of 2021, they are discontinued. This aims to fix that for good.
+VEX Robotics once sold a "partner controller" that allowed a secondary controller to control the robot. However, as of 2021, they are discontinued. 
 
 \begin{figure}[h]
     \centering
@@ -10,7 +10,8 @@ VEX Robotics once sold a "partner controller" that allowed two controllers to co
     }
 \end{figure}
 
-Two posts peaked my interest when researching this. One \cite{PartnerCite2}, stating that the cable needed to connect these controllers together is simply an old-school 4-conductor phone cable, and the second \cite{PartnerCite1}, stating that regular VEXnet controllers have firmware that allows them to act as partner controllers.
+Turns out, the special wire needed to connect VEXnet controllers together is a regular old 4-conductor phone cable \cite{PartnerCite2}. Even better, the regular VEXnet controller has had a firmware update that allows them to be used as a partner controller, meaning you only need to connect two regular controllers together \cite{PartnerCite1}.
+
 
 \begin{figure}[h]
     \centering
@@ -29,4 +30,4 @@ Two posts peaked my interest when researching this. One \cite{PartnerCite2}, sta
     }
 \end{figure}
 
-Instinctively, I tried to use an ethernet cable into the port. After all, they had a very similar designs to a telephone cable. Surprisingly, I accidentally found the cable used for a VEX competition switch \cite{VEXCompSwitch}, which is used to switch between autonomous and manual control during competition. Eventually, I went around to buying a coiled telephone cable, connected the controllers, and successfully made a program that allowed both controllers to be used on the same robot.
+Along the way, I discovered other ports on the VEXnet controllers; An ethernet cable can be plugged into the controller when using the competition switch, which is important to know if you want to make your own \cite{VEXCompSwitch}. The other port is the programming port that comes with the programming kit for the Cortex for wireless programming, which sadly cannot be built from scratch.
