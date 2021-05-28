@@ -1,18 +1,14 @@
-﻿\section{[Completed] IP Camera}
+﻿\section{Low-latency Wireless Camera}
 
-This project proposes two different methods for near real-time, wireless, cheap video transmission. Keep in mind that the research done by this singular project completely dwarfs every single other project in this document; The basics of wireless networks, statistics, and an entirely different operating system had to be learned in the span of 4 months to make this possible. Here I'll try to keep things are brief as possible.
+I propose two different methods for low-latency, wireless, cheap video transmission: Mobile Device and Raspberry Pi transmission. 
 
-\subsection{Mobile IP Camera}
+\subsection{Mobile Device Transmission}
 
-This was my first go-to option for wireless video transmission. Phones are pretty small, have cameras and wireless capabilities, and nearly everyone in California has one. So, I did a formal experiment between three video streaming apps -- Skype \cite{Skype}, Jami \cite{Jami}, and IP Webcam \cite{IPWebcam} -- all on three different phones and constructed a histogram of the round-trip latency of each; All apps had the most optimal settings at streaming at 480p. The data-collection process, which was automated with a python script and a trained AI over the span of an hour, was simple:
+Phones are robust computers that are perfect for wireless video transmission due to their decent battery, camera, and wireless capabilities. Without trying to hack the phone, I did an experiment on the following apps for wireless video transmission: \href{https://play.google.com/store/apps/details?id=com.skype.raider&hl=en_US}{Skype}, \href{https://play.google.com/store/apps/details?id=cx.ring&hl=en_US}{Jami}, and \href{https://play.google.com/store/apps/details?id=com.pas.webcam&hl=en_US}{IPWebcam}. Based on speculation and googling, these apps were specifically chosen for their completely different architectures for video transmission, with Skype using a central server to relay peer to peer connections, Jami being completely peer to peer, and IP Webcam streaming video to a local webserver.
 
-\begin{enumerate}
-\item{Start a clock on a computer.}
-\item{Point the phone, with the app running, on that clock.}
-\item{On the computer, view the video feed of the phone and take a screenshot.}
-\item{Using a screenshot, find the difference between the video feed's time and the clock's time. This is the round-trip latency. }
-\end{enumerate}
+To determine which app has the best performance, I ran each app with very similar settings on the same network at 480p on three different Android phones and measured their latencies based on the offset, in milliseconds, there was when the app streamed a clock from my computer back into my computer. Specifically, each app streamed a millisecond-accurate clock from my 60hz display that was accurate to about 17 milliseconds. From there, a built-in screenshot app in my computer was used to capture a picture of the streamed clock and the actual clock and the latency was based off that. Using a python script and \href{https://pypi.org/project/pytesseract/}{pytesseract}, I automated this process for over an hour for each app on each phone. Overall, IP Webcam always had the lowest mean latency for each phone, especially the Stylo 6 at a latency of 164.80 milliseconds, most likely making it the best app on here.
 
+\begin{figure}[h]
 \begin{centering}
 Phone-App Latency Table\\[0.5cm]
 
@@ -22,84 +18,37 @@ Phone-App Latency Table\\[0.5cm]
     Blade Max & 393.03 ms & 313.30 ms & 268.60 ms \\[0.5cm]
     Stylo 6 & 729.70 ms & 301.90 ms & 164.80 ms
 \end{tabular} \newline
-
 \end{centering}
+\end{figure}
 
+At 480p on a 2.4 ghz network, IP Webcam is the most viable option. With indirect touch, the human eye can perceive latency at around 100 ms \cite{LatencyStudy}, so this method isn't that far off from being noticably instant. Playing around with the settings on a 5 ghz network, I was able to get an average latency of 135.47 ms with a bandwidth of less than 1 Mbps with 352x288 video resolution + 20\% Quality on the Stylo 6, making the camera very fast, usable, and cheap to deploy and use even on a crowded network.
 
+\subsection{Raspberry Pi Transmission}
+The only thing as mobile as a phone with the same capabilities at a cheap cost was a Raspberry Pi. Like mobile devices, a Raspberry Pi is a miniature computer that can do all sorts of tasks. The only difference here is that the Raspberry Pi is \textit{full-fledged} computer running on a version of Linux with a much more powerful processor, wifi card, and memory. Using the \href{https://www.raspberrypi.org/products/camera-module-v2/}{Raspberry Pi Camera Module} and a multi-media library called \href{https://gstreamer.freedesktop.org/}{Gstreamer}, I wrote a quick command to stream video from the Raspberry Pi to my computer through a local 5 ghz network. 
+
+\begin{figure}[h]
 \begin{centering}
-Phone-App Standard Deviation Table\\[0.5cm]
 
-\begin{tabular}{c|c|c|c}
-    & Skype Std. Dev. & Jami Std. Dev. & IP Webcam Std. Dev. \\[0.5cm]
-    On5 & 67.01 ms & 55.30 ms & 59.59 ms \\[0.5cm]
-    Blade Max & 258.75 ms & 80.56 ms & 100.83 ms \\[0.5cm]
-    Stylo 6 & 45.38 ms & 46.62 ms & 31.03 ms
-\end{tabular} \newline
+\textit{Command for Raspberry Pi (Sender)}
 
+\texttt{raspivid -n -t 0 -w \{width\} -h \{height\} -qp \{quality\} -fps \{fps\} --flush -b \{bitrate\} -o - | gst-launch-1.0 -e -vvvv fdsrc ! h264parse ! rtph264pay config-interval=1 pt=96 ! udpsink host=\{Linux Machine IP\} port=\{UDP port\}} \\[1cm]
+
+\textit{Command for Linux Machine (Receiver)}
+
+\texttt{gst-launch-1.0 -e -v udpsrc address=\{Linux Machine IP\} port=\{UDP port\} ! application/x-rtp, payload=96 ! rtpjitterbuffer ! rtph264depay ! avdec\_h264 ! autovideosink sync=false}
 \end{centering}
-
-These three apps in particular were chosen because they had special, very different network architectures that I believed impacted performance. As you can see from the results, my hypothesis was right. Overall, IP Webcam had the lowest average latency of the apps with just 164.80 ms on the Stylo 6, which was the phone with the best specs.
-
-In another, \textit{much} longer experiment, I played around with settings that squeezed performance out of IP Webcam while having a usable quality and low bandwidth. The optimum settings were 352x288 video resolution + 20\% Quality, giving an average latency of 135.47 ms with a bandwidth of just 0.9 Mbps. For comparison, the settings used in the former had, on average, 10ms more latency and 1500x more bandwidth usage.
-
-
-\begin{figure}[!htb]
-    \centering
-    \includegraphics[width=\textwidth,height=3cm,keepaspectratio=true]{IPCamera/On5Skype}
-    \includegraphics[width=\textwidth,height=3cm,keepaspectratio=true]{IPCamera/On5Jami}
-    \includegraphics[width=\textwidth,height=3cm,keepaspectratio=true]{IPCamera/On5IPCam}
-    \caption{
-        Round-trip latency of the apps on a Samsung On5 \cite{On5}.
-    }
 \end{figure}
 
-\begin{figure}[!htb]
-    \centering
-    \includegraphics[width=\textwidth,height=3cm,keepaspectratio=true]{IPCamera/BladeSkype}
-    \includegraphics[width=\textwidth,height=3cm,keepaspectratio=true]{IPCamera/BladeJami}
-    \includegraphics[width=\textwidth,height=3cm,keepaspectratio=true]{IPCamera/BladeIPCam}
-    \caption{
-        Round-trip latency of the apps on a ZTE Blade Max \cite{BladeMax}.
-    }
-\end{figure}
-
-\begin{figure}[!htb]
-    \centering
-    \includegraphics[width=\textwidth,height=3cm,keepaspectratio=true]{IPCamera/StyloSkype}
-    \includegraphics[width=\textwidth,height=3cm,keepaspectratio=true]{IPCamera/StyloJami}
-    \includegraphics[width=\textwidth,height=3cm,keepaspectratio=true]{IPCamera/StyloIPCam}
-    \caption{
-        Round-trip latency of the apps on a LG Stylo 6 \cite{Stylo}.
-    }
-\end{figure}
-
-\newpage
-\subsection{Raspberry Pi Camera}
-I wanted more quality. More speed. MORE POWER. Due to this, I got a Raspberry Pi 4 for Christmas, bought a camera module, and strived to push it to its limits.
+The sender command says this: feed the H.264 video feed of the Raspberry Pi's camera (\texttt{raspivid}) into \texttt{gst-launch-1.0} (gstreamer) via the pipe operator \texttt{|} so that it gets sent to the receiver via a UDP connection. The receiving command simply decodes the data into a window.
 
 \begin{figure}[!htb]
     \centering
     \includegraphics[width=\textwidth,height=6cm,keepaspectratio=true]{IPCamera/3DRaspCustom}
     \includegraphics[width=\textwidth,height=6cm,keepaspectratio=true]{IPCamera/RemoteController}
     \caption{
-        (Left) The finalized Raspberry Pi camera being mounted on the robot. (Right) live video feed of the camera being shown on the monitor.
+        (Left) Raspberry Pi Camera mounted via a 3D printed part. (Right) Live video feed of the camera.
     }
 \end{figure}
 
-Unfortunately, the solution to this problem was not easily solvable. The streaming scripts online focused primarily toward streaming over the internet, not a LAN. So I spent weeks finding and researching streaming libraries and the basics of networking until I derived two very special commands using a media-streaming library called gstreamer \cite{gstreamer}:
 
-\begin{centering}
-
-\textit{Raspberry Pi (Sender)}
-
-\texttt{raspivid -n -t 0 -w \{width\} -h \{height\} -qp \{quality\} -fps \{fps\} --flush -b \{bitrate\} -o - | gst-launch-1.0 -e -vvvv fdsrc ! h264parse ! rtph264pay config-interval=1 pt=96 ! udpsink host=\{Linux Machine IP\} port=\{UDP port\}} \\[1cm]
-
-\textit{Linux Machine (Receiver)}
-
-\texttt{gst-launch-1.0 -e -v udpsrc address=\{Linux Machine IP\} port=\{UDP port\} ! application/x-rtp, payload=96 ! rtpjitterbuffer ! rtph264depay ! avdec\_h264 ! autovideosink sync=false}
-
-\end{centering}
-
-The sender command basically says this: feed the H.264-encoded video feed of the Raspberry Pi's camera (\texttt{raspivid}) into \texttt{gst-launch-1.0} (gstreamer) via the pipe operator \texttt{|} so that it gets sent to the receiver via a UDP connection. The receiving command simply decodes the data into a window.
-
-While I am yet to officially collect data via a table, I can say, from experience, that this setup can stream 720p with less than 150 ms of latency at 30 fps; Something unheard of in weak Android phones. Due to this, I would consider using this camera as the main camera, with phone acting as backups / side cameras.
+Unfortunately, I am too lazy to measure how fast this approach is compared to phones. However, I can say, from experience, that this setup can stream 720p with less than 150 ms of latency at 30 fps; Something unheard of in weak Android phones. Due to this, I would consider using this camera as the main camera, with phone acting as backups / side cameras.
